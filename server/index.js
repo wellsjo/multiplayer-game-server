@@ -1,16 +1,15 @@
-'use strict'
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
-// module dependencies
-const config = require('../config');
-const express = require('express');
-const http = require('http');
-const socketio = require('socket.io');
+server.listen(3000);
 
-const server = express();
-const httpServer = http.createServer(server);
-const io = socketio(httpServer);
+io.on('connection', function (socket) {
 
-server.io = io;
-httpServer.listen(config.port);
+  console.log('hello world');
 
-module.exports = server;
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+
+});
