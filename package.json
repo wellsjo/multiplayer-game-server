@@ -1,0 +1,14 @@
+{
+  "name": "xombi-server",
+  "version": "1.0.0",
+  "description": "multiplayer game server",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wellsjo/xombi-server.git"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "socket.io": "^1.4.5"
+  }
+}
