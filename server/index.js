@@ -1,15 +1,10 @@
-var app = require('express')();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+'use strict'
 
-server.listen(3000);
+const config = require('../config');
+const express = require('express');
+const app = express();
+const server = require('http').Server(app).listen(config.port);
+const io = require('socket.io')(server);
 
-io.on('connection', function (socket) {
-
-  console.log('hello world');
-
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-
-});
+console.info(`listening on port ${config.port}`);
+module.exports = io;

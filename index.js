@@ -1,15 +1,15 @@
 'use strict'
 
-const server = require('./server');
+const config = require('./config');
+const map = require('./maps/1.json');
+const io = require('./server');
 
-server.io.on('connection', socket => {
+io.on('connection', socket => {
 
-  console.log('hello world');
+  console.log('connection');
 
   socket.on('ping', data => {
-    console.log('receive ping');
-    console.log('data: ' + data);
-    console.log('send pong');
+    console.log('ping');
     socket.emit('pong');
   });
 

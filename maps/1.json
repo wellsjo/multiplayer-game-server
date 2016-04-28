@@ -1,0 +1,11 @@
+{
+  "name": "hello world",
+  "positions": {
+    "p1": {
+      "start": [0, 0]
+    },
+    "p2": {
+      "start": [1, 2]
+    }
+  }
+}
