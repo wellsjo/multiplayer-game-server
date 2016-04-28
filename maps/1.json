@@ -1,5 +1,7 @@
 {
   "name": "hello world",
+  "geometry": {
+  },
   "positions": {
     "p1": {
       "start": [0, 0]
