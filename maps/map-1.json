@@ -1,13 +1,15 @@
 {
-  "name": "hello world",
-  "geometry": {
+  "name": "hello-world",
+  "width": 10,
+  "height": 10,
+  "p1": {
+    "x": 0,
+    "y": 0,
+    "z": 0
   },
-  "positions": {
-    "p1": {
-      "start": [0, 0]
-    },
-    "p2": {
-      "start": [1, 2]
-    }
+  "p2": {
+    "x": 10,
+    "y": 10,
+    "z": 0
   }
 }

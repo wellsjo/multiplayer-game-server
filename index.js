@@ -1,3 +1,7 @@
+/**
+ * Main server logic
+ */
+
 'use strict'
 
 const config = require('./config');
@@ -20,6 +24,10 @@ io.on('connection', socket => {
     console.log('disconnected');
   });
 
+  socket.on('error', e => {
+    console.log('error', e);
+  });
+
   if (!waitroom.length) {
 
     // user is waiting for a match
@@ -32,6 +40,6 @@ io.on('connection', socket => {
     let p1 = waitroom.pop();
     let p2 = socket;
     let room = new Date().getTime();
-    matches.push(new Match(io, room, p1, p2));
+    matches.push(new Match(io, room, 'map-1', p1, p2));
   }
 });

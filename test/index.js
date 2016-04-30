@@ -18,8 +18,4 @@ socket.on('matchfound', _ => {
   setTimeout(_ => {
     socket.emit('action', 'move');
   }, 1000);
-
-  setTimeout(_ => {
-    socket.emit('action', 'build');
-  }, 2000);
 });
