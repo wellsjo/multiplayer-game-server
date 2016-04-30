@@ -23,8 +23,7 @@ io.on('connection', socket => {
   } else {
     let p1 = waitroom.pop();
     let p2 = socket;
-    p1.emit('matchfound');
-    p2.emit('matchfound');
-    matches.push(new Match(p1, p2, matches.length));
+    let room = new Date().getTime();
+    matches.push(new Match(io, room, p1, p2));
   }
 });
