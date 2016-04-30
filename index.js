@@ -16,11 +16,19 @@ io.on('connection', socket => {
 
   console.log('new connection');
 
+  socket.on('disconnect', _ => {
+    console.log('disconnected');
+  });
+
   if (!waitroom.length) {
+
+    // user is waiting for a match
     console.log('connection waiting')
     waitroom.push(socket);
     socket.emit('waiting');
   } else {
+
+    // start new match
     let p1 = waitroom.pop();
     let p2 = socket;
     let room = new Date().getTime();
