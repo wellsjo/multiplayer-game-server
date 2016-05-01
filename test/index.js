@@ -18,4 +18,5 @@ socket.on('matchfound', _ => {
   setTimeout(_ => {
     socket.emit('action', 'move');
   }, 1000);
+
 });

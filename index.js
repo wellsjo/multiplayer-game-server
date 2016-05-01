@@ -4,16 +4,12 @@
 
 'use strict'
 
-const config = require('./config');
 const Match = require('./lib/Match');
-const map = require('./maps/map-1.json');
 const io = require('./server');
 
-// array of games in memory
-const matches = [];
-
-// array of players awaiting connection
-const waitroom = [];
+// waitroom and matches
+const waitroom = [], matches = [];
+setInterval(_ => console.info(matches.map(m => m.id)), 10000);
 
 // on connection either start a match or enter a waitroom
 io.on('connection', socket => {
@@ -35,7 +31,11 @@ io.on('connection', socket => {
     // start new match
     let p1 = waitroom.pop();
     let p2 = socket;
-    let room = new Date().getTime();
-    matches.push(new Match(io, room, 'map-1', p1, p2));
+    let id = new Date().getTime();
+    let match = new Match(io, id, 'map-1', p1, p2);
+    matches.push(match);
+    match.on('end', _ => {
+      console.log('match ended');
+    });
   }
 });
