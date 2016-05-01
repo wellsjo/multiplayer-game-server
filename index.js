@@ -6,6 +6,7 @@
 
 const Match = require('./lib/Match');
 const io = require('./server');
+const generateId = require('shortid').generate;
 
 // waitroom and matches
 const waitroom = [], matches = [];
@@ -23,15 +24,15 @@ io.on('connection', socket => {
   if (!waitroom.length) {
 
     // enter waitroom
-    console.info('connection waiting')
     waitroom.push(socket);
     socket.emit('waiting');
+    console.info('connection waiting')
   } else {
 
     // start new match
     let p1 = waitroom.pop();
     let p2 = socket;
-    let id = new Date().getTime();
+    let id = generateId();
     let match = new Match(io, id, 'map-1', p1, p2);
     matches.push(match);
     match.on('end', _ => {
