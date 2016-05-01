@@ -1,0 +1,3 @@
+#!/bin/bash
+
+forever start --uid "xombi-server" .
