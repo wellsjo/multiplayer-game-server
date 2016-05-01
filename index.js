@@ -15,23 +15,19 @@ const matches = [];
 // array of players awaiting connection
 const waitroom = [];
 
-// waitroom / connection logic
+// on connection either start a match or enter a waitroom
 io.on('connection', socket => {
 
-  console.log('new connection');
+  console.info('new connection');
 
-  socket.on('disconnect', _ => {
-    console.log('disconnected');
-  });
-
-  socket.on('error', e => {
-    console.log('error', e);
+  socket.on('disconnect', reason => {
+    console.info('disconnected', reason);
   });
 
   if (!waitroom.length) {
 
-    // user is waiting for a match
-    console.log('connection waiting')
+    // enter waitroom
+    console.info('connection waiting')
     waitroom.push(socket);
     socket.emit('waiting');
   } else {
