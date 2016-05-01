@@ -6,7 +6,7 @@
 
 const Match = require('./lib/Match');
 const io = require('./server');
-const generateId = require('shortid').generate;
+const gen = require('shortid').generate;
 
 // waitroom and matches
 const waitroom = [], matches = [];
@@ -15,25 +15,24 @@ setInterval(_ => console.info(matches.map(m => m.id)), 10000);
 // on connection either start a match or enter a waitroom
 io.on('connection', socket => {
 
-  console.info('new connection');
+  socket.id = gen();
 
-  socket.on('disconnect', reason => {
-    console.info('disconnected', reason);
+  socket.on('disconnect', _ => {
+    waitroom.filter(s => s.id = socket.id);
   });
+
+  console.info('new connection');
 
   if (!waitroom.length) {
 
-    // enter waitroom
+    // queue waitroom
     waitroom.push(socket);
     socket.emit('waiting');
     console.info('connection waiting')
   } else {
 
-    // start new match
-    let p1 = waitroom.pop();
-    let p2 = socket;
-    let id = generateId();
-    let match = new Match(io, id, 'map-1', p1, p2);
+    // start match
+    let match = new Match(io, gen(), 'map-1', waitroom.pop(), socket);
     matches.push(match);
     match.on('end', _ => {
       console.log('match ended');
