@@ -7,7 +7,9 @@
 const Match = require('./lib/Match');
 const io = require('./server');
 const gen = require('shortid').generate;
-const waitroom = [], matches = [];
+
+// waitroom and matches stored in memory
+let waitroom = [], matches = [];
 
 // on connection either start a match or enter a waitroom
 io.on('connection', socket => {
